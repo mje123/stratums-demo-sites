@@ -1,0 +1,47 @@
+{
+  "expireAfterDays": 30,
+  "demos": {
+    "airplane-rental-ventures": {
+      "created": "2026-10-20"
+    },
+    "client-name": {
+      "created": "2026-10-18",
+      "keep": true
+    },
+    "cypress-college": {
+      "created": "2026-10-20"
+    },
+    "demo1": {
+      "created": "2026-10-18",
+      "keep": true
+    },
+    "demo2": {
+      "created": "2026-10-18",
+      "keep": true
+    },
+    "driftless-aero": {
+      "created": "2026-10-18"
+    },
+    "flying-tigers": {
+      "created": "2026-10-18"
+    },
+    "jf-aviation": {
+      "created": "2026-10-20"
+    },
+    "lc-flying": {
+      "created": "2026-10-18"
+    },
+    "mrfti": {
+      "created": "2026-10-20"
+    },
+    "spencer-aviation": {
+      "created": "2026-10-18"
+    },
+    "suburban-aviation": {
+      "created": "2026-10-18"
+    },
+    "venture-north": {
+      "created": "2026-10-18"
+    }
+  }
+}

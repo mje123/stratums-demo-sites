@@ -29,6 +29,21 @@ folder and import them from its `page.tsx`. Images go in `public/` (for example
 
 Folder names should be URL-friendly: lowercase, with hyphens, no spaces.
 
+## Demos expire after 30 days
+
+`demos.json` records the date each demo was created. 30 days later:
+
+- the demo's URL returns 404 (checked hourly, no redeploy needed), and
+- a daily GitHub Action (`.github/workflows/expire-demos.yml`) deletes its
+  `demos/<slug>` and `public/<slug>` folders and pushes, so Vercel redeploys.
+
+New demo folders are registered automatically on the next daily run (with that
+day's date). Add an entry yourself to set the date explicitly. To keep a demo
+longer, change its `created` date; to keep it forever, add `"keep": true`.
+Change `expireAfterDays` to change the window for every demo. You can run the
+cleanup by hand with `node scripts/expire-demos.mjs`, or from the Actions tab
+("Expire old demos" → Run workflow).
+
 ## Run locally
 
 ```

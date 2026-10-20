@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { notFound } from "next/navigation";
+import { isExpired } from "@/lib/expiry";
 
 // Every folder in /demos with a page.tsx becomes a URL: /demos/acme/page.tsx -> /acme
 const DEMOS_DIR = path.join(process.cwd(), "demos");
@@ -12,14 +13,17 @@ function getSlugs() {
     .map((d) => d.name);
 }
 
-// Pre-render every demo at build time; any other URL returns 404.
+// Pre-render every live demo at build time; any other URL returns 404.
 export const dynamicParams = false;
+// Re-check hourly so a demo 404s as soon as it expires, without waiting for a redeploy.
+export const revalidate = 3600;
 
 export function generateStaticParams() {
-  return getSlugs().map((slug) => ({ slug }));
+  return getSlugs().filter((slug) => !isExpired(slug)).map((slug) => ({ slug }));
 }
 
 async function loadDemo(slug: string) {
+  if (isExpired(slug)) notFound();
   try {
     return await import(`@/demos/${slug}/page`);
   } catch {
