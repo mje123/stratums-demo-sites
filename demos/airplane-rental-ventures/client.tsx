@@ -64,3 +64,33 @@ export function Reveal({ children, delay = 0, className = "" }: { children: Reac
   }, []);
   return <div ref={ref} className={`${s.reveal} ${className}`} style={{ transitionDelay: `${delay}ms` }}>{children}</div>;
 }
+
+const trainingTypes = ["Private Pilot", "Instrument Pilot", "Commercial Pilot", "Flight Instructor", "Flight Review", "Aircraft Rental"];
+
+export function Inquiry({ email }: { email: string }) {
+  const [type, setType] = useState(trainingTypes[0]);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [msg, setMsg] = useState("");
+  const send = (e: React.FormEvent) => {
+    e.preventDefault();
+    const body = [`Name: ${name}`, phone ? `Phone: ${phone}` : "", `Interested in: ${type}`, msg ? `\n${msg}` : ""].filter(Boolean).join("\n");
+    window.location.href = `mailto:${email}?subject=${encodeURIComponent(`${type} inquiry`)}&body=${encodeURIComponent(body)}`;
+  };
+  return (
+    <form className={s.form} onSubmit={send}>
+      <p className={s.formTitle}>What type of training?</p>
+      <div className={s.typeGrid} role="radiogroup" aria-label="Training type">
+        {trainingTypes.map((t) => (
+          <button type="button" key={t} role="radio" aria-checked={type === t} className={`${s.type} ${type === t ? s.typeOn : ""}`} onClick={() => setType(t)}>{t}</button>
+        ))}
+      </div>
+      <div className={s.fields}>
+        <label><span>Name</span><input required value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" /></label>
+        <label><span>Phone</span><input value={phone} onChange={(e) => setPhone(e.target.value)} type="tel" autoComplete="tel" /></label>
+        <label className={s.full}><span>Message</span><textarea rows={3} value={msg} onChange={(e) => setMsg(e.target.value)} placeholder="Tell us about your flying goals" /></label>
+      </div>
+      <button type="submit" className={`${s.btn} ${s.btnPrimary} ${s.formBtn}`}>Send Inquiry</button>
+    </form>
+  );
+}

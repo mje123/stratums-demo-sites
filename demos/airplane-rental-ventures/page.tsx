@@ -2,7 +2,7 @@
 // Facts are from airplanerentalventures.com; photos and logo are the school's own, copied into /public/airplane-rental-ventures.
 import { Playfair_Display, Outfit } from "next/font/google";
 import s from "./styles.module.css";
-import { Nav, Reveal } from "./client";
+import { Inquiry, Nav, Reveal } from "./client";
 
 const display = Playfair_Display({ subsets: ["latin"], style: ["normal", "italic"], variable: "--arv-display" });
 const sans = Outfit({ subsets: ["latin"], variable: "--arv-sans" });
@@ -52,7 +52,7 @@ export default function AirplaneRentalVentures() {
         <img className={s.heroImg} src={img("sedona-ramp")} alt="A red and white Cessna on the ramp beneath Arizona red rocks" fetchPriority="high" />
         <div className={s.heroShade} />
         <div className={s.heroInner}>
-          <p className={`${s.eyebrow} ${s.rise}`}>Falcon Field · Mesa, Arizona · Since 2013</p>
+          <p className={`${s.eyebrow} ${s.rise}`}>Falcon Field (KFFZ) · Mesa, Arizona · Since 2013</p>
           <h1 className={`${s.heroTitle} ${s.rise}`} style={{ animationDelay: "120ms" }}>
             Learn to fly<br /><em>on your terms.</em>
           </h1>
@@ -139,6 +139,21 @@ export default function AirplaneRentalVentures() {
         </div>
       </section>
 
+      {/* STRIP */}
+      <section className={s.strip} aria-label="Photos from the cockpit">
+        {[
+          ["takeoff-cockpit", "Lined up and ready to roll"],
+          ["peaks", "Above the snow-capped peaks"],
+          ["night", "Night flying over the valley lights"],
+          ["sedona-ramp", "Red-rock ramp days"],
+        ].map(([src, cap], i) => (
+          <Reveal key={src} delay={i * 90} className={s.stripItem}>
+            <img src={img(src)} alt={cap} loading="lazy" />
+            <span>{cap}</span>
+          </Reveal>
+        ))}
+      </section>
+
       {/* VIDEOS */}
       <section id="videos" className={`${s.section} ${s.night}`}>
         <img src={img("night")} alt="" className={s.nightImg} loading="lazy" />
@@ -181,11 +196,14 @@ export default function AirplaneRentalVentures() {
               <a href={contact.tel} className={`${s.btn} ${s.btnPrimary}`}>Call {contact.phone}</a>
               <a href={contact.mailto("Flight training inquiry")} className={`${s.btn} ${s.btnGlass}`}>Email Us</a>
             </div>
+            <div className={s.contactCard}>
+              <div><span>Visit</span><p><a href={contact.maps} target="_blank" rel="noreferrer">{contact.address[0]}<br />{contact.address[1]}</a></p></div>
+              <div><span>Call</span><p><a href={contact.tel}>{contact.phone}</a></p></div>
+              <div><span>Email</span><p><a href={`mailto:${contact.email}`}>{contact.email}</a></p></div>
+            </div>
           </Reveal>
-          <Reveal delay={120} className={s.contactCard}>
-            <div><span>Visit</span><p><a href={contact.maps} target="_blank" rel="noreferrer">{contact.address[0]}<br />{contact.address[1]}</a></p></div>
-            <div><span>Call</span><p><a href={contact.tel}>{contact.phone}</a></p></div>
-            <div><span>Email</span><p><a href={`mailto:${contact.email}`}>{contact.email}</a></p></div>
+          <Reveal delay={120}>
+            <Inquiry email={contact.email} />
           </Reveal>
         </div>
         <footer className={`${s.wrap} ${s.footer}`}>
