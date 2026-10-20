@@ -40,10 +40,50 @@ const pathway = [
 const simSkills = ["Basic flight skills", "Aircraft performance", "Flight maneuvers", "Situational awareness", "FAA exam prep", "Instrument procedures"];
 
 const programs = [
-  { img: "pilot", tag: "Pilot Program", title: "Fly for a living, or fly for fun.", body: "Ground training and flight simulation with instructors who currently work, or have worked extensively, with many of the leading airlines.", link: "#pathway" },
+  { img: "airliner", tag: "Pilot Program", title: "Fly for a living, or fly for fun.", body: "Ground training and flight simulation with instructors who currently work, or have worked extensively, with many of the leading airlines.", link: "#pathway" },
   { img: "drone", tag: "UAS / Drone", title: "The fastest-growing seat in aviation.", body: "Drone operations on land, in the air and in space: communications, propulsion and power, teaming, and FAA regulations, with college credit toward certificates, degrees and transfer.", link: "#contact" },
   { img: "attendant", tag: "Airline & Travel Careers", title: "Careers in the sky, at sea, and on land.", body: "From flight attendant to travel careers and cruise ships, the Aviation & Travel Careers department has a program for you.", link: "#contact" },
 ];
+
+const PLANE = "M12 2c.8 0 1.4.7 1.4 1.6V9l7.6 4.4v2l-7.6-2.2v4.6l2.2 1.6V21L12 20l-3.6 1v-1.6l2.2-1.6v-4.6L3 15.4v-2L10.6 9V3.6C10.6 2.7 11.2 2 12 2z";
+
+function Plane({ className }: { className?: string }) {
+  return <svg viewBox="0 0 24 24" className={className} aria-hidden><path d={PLANE} fill="currentColor" /></svg>;
+}
+
+// Decorative cockpit instruments (no data): ticks, a needle and a label
+function Gauge({ label, kind = "dial" }: { label: string; kind?: "dial" | "attitude" }) {
+  const ticks = Array.from({ length: 36 }, (_, i) => i * 10);
+  return (
+    <svg viewBox="0 0 120 120" className={s.gauge} aria-hidden>
+      <defs>
+        <clipPath id={`face-${label}`}><circle cx="60" cy="60" r="46" /></clipPath>
+      </defs>
+      <circle cx="60" cy="60" r="56" className={s.gBezel} />
+      {kind === "attitude" ? (
+        <g clipPath={`url(#face-${label})`}>
+          <g className={s.gHorizon}>
+            <rect x="-20" y="-20" width="160" height="80" fill="#2f7fd0" />
+            <rect x="-20" y="60" width="160" height="80" fill="#8a5a2b" />
+            <line x1="-20" y1="60" x2="140" y2="60" stroke="#fff" strokeWidth="1.5" />
+            {[-16, -8, 8, 16].map((d) => <line key={d} x1={d % 16 ? 52 : 46} x2={d % 16 ? 68 : 74} y1={60 + d} y2={60 + d} stroke="#fff" strokeWidth="1" />)}
+          </g>
+        </g>
+      ) : (
+        <g>
+          <circle cx="60" cy="60" r="46" className={s.gFace} />
+          {ticks.map((t) => (
+            <line key={t} x1="60" y1="16" x2="60" y2={t % 30 ? 21 : 25} className={s.gTick} transform={`rotate(${t} 60 60)`} />
+          ))}
+          <path d="M60 60 L60 22" className={s.gNeedle} />
+        </g>
+      )}
+      {kind === "attitude" && <path d="M38 62 H52 L56 66 L60 62 L64 66 L68 62 H82" className={s.gWings} />}
+      <circle cx="60" cy="60" r="3.5" fill="#ffb547" />
+      <text x="60" y="86" className={s.gLabel}>{label}</text>
+    </svg>
+  );
+}
 
 export default function CypressCollege() {
   return (
@@ -52,12 +92,8 @@ export default function CypressCollege() {
 
       {/* HERO */}
       <section className={s.hero}>
-        <img className={s.heroImg} src={img("takeoff")} alt="An airliner climbing out over a runway at sunset" fetchPriority="high" />
+        <img className={s.heroImg} src={img("pilot")} alt="A smiling student pilot wearing a headset in the cockpit of a small airplane" fetchPriority="high" />
         <div className={s.heroShade} />
-        <div className={s.hud} aria-hidden>
-          <span className={s.hudLine} />
-          <span className={s.hudReadout}>CYPRESS COLLEGE · TRAINING PILOTS SINCE 1967</span>
-        </div>
         <div className={s.heroInner}>
           <p className={`${s.chip} ${s.rise}`}>Aviation &amp; Travel Careers · Greater O.C./L.A.</p>
           <h1 className={`${s.heroTitle} ${s.rise}`} style={{ animationDelay: "120ms" }}>
@@ -79,12 +115,20 @@ export default function CypressCollege() {
         </div>
       </section>
 
+      {/* RUNWAY */}
+      <div className={s.runway} aria-hidden>
+        <div className={s.threshold}>{Array.from({ length: 8 }, (_, i) => <i key={i} />)}</div>
+        <span className={s.rwyNum}>CYPRESS</span>
+        <div className={s.centerline} />
+        <Plane className={s.rwyPlane} />
+      </div>
+
       {/* PATHWAY */}
       <section id="pathway" className={`${s.section} ${s.light}`}>
         <div className={s.wrap}>
           <div className={s.head}>
             <Reveal>
-              <p className={s.kicker}>The pilot pathway</p>
+              <p className={s.kicker}>Your flight plan</p>
               <h2 className={s.h2}>Two kinds of school. <span>One clear route.</span></h2>
             </Reveal>
             <Reveal delay={120}>
@@ -95,6 +139,7 @@ export default function CypressCollege() {
             </Reveal>
           </div>
           <ol className={s.route}>
+            <Plane className={s.routePlane} />
             {pathway.map((p, i) => (
               <Reveal key={p.step} delay={i * 90} className={s.leg}>
                 <span className={s.legDot}>{i + 1}</span>
@@ -144,6 +189,10 @@ export default function CypressCollege() {
               <span>Virtual Reality</span>
               <span>Open lab for enrolled students</span>
             </div>
+            <div className={s.sixPack} aria-hidden>
+              <Gauge label="ASI" /><Gauge label="ATT" kind="attitude" /><Gauge label="ALT" />
+              <Gauge label="TC" /><Gauge label="HDG" /><Gauge label="VSI" />
+            </div>
           </Reveal>
         </div>
       </section>
@@ -181,6 +230,29 @@ export default function CypressCollege() {
               <li>Prepare you to pass the rigorous training requirements</li>
               <li>Provide college credit toward certificates, degrees and transfer</li>
             </ol>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* GO FLY */}
+      <section className={s.goFly}>
+        <img src={img("takeoff")} alt="An airplane climbing out over the runway at sunset" className={s.goFlyImg} loading="lazy" />
+        <div className={s.goFlyShade} />
+        <div className={`${s.wrap} ${s.goFlyInner}`}>
+          <Reveal className={s.goFlyCard}>
+            <p className={`${s.kicker} ${s.kickerLight}`}>Ground school, then the real thing</p>
+            <h2 className={`${s.h2} ${s.h2Light}`}>Then you <span>actually go fly.</span></h2>
+            <p className={`${s.lede} ${s.ledeLight}`}>
+              After ground school, Cypress College has the resources, instructors and partnerships to help you get in the air, at a lower cost than
+              most flight schools offer.
+            </p>
+            <ul className={s.checklist}>
+              <li>Ground school certificates</li>
+              <li>Simulator practice, free for enrolled students</li>
+              <li>Flight lessons through instructors &amp; partners</li>
+              <li>Professional pilot career path</li>
+            </ul>
+            <a href={contact.mailto("Getting started with flight training")} className={`${s.btn} ${s.btnPrimary}`}>Start Your Flight Plan</a>
           </Reveal>
         </div>
       </section>

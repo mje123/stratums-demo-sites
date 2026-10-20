@@ -191,3 +191,80 @@
   .root *, .root *::before, .root *::after { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* ---------- Flight-school details ---------- */
+.gauge { width: 100%; height: auto; display: block; }
+.gBezel { fill: #0b0f17; stroke: #2a3348; stroke-width: 2; }
+.gFace { fill: #05080f; }
+.gTick { stroke: rgba(255, 255, 255, 0.75); stroke-width: 1.4; }
+.gNeedle { stroke: #fff; stroke-width: 2.4; stroke-linecap: round; transform-origin: 60px 60px; animation: needle 6s ease-in-out infinite alternate; }
+.gauge:nth-child(3n) .gNeedle { animation-duration: 8s; animation-delay: -2s; }
+.gauge:nth-child(4) .gNeedle { animation-duration: 5s; animation-delay: -1s; }
+.gHorizon { transform-origin: 60px 60px; animation: bank 7s ease-in-out infinite alternate; }
+.gWings { fill: none; stroke: #ffb547; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.gLabel { fill: rgba(255, 255, 255, 0.55); font: 600 8px var(--cy-display); letter-spacing: 0.15em; text-anchor: middle; }
+@keyframes needle { from { transform: rotate(40deg); } to { transform: rotate(150deg); } }
+@keyframes bank { from { transform: rotate(-12deg) translateY(-4px); } to { transform: rotate(10deg) translateY(5px); } }
+
+.hud { opacity: 1; width: 168px; align-items: center; gap: 12px; top: auto; bottom: 230px; }
+.hud .gauge { filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5)); }
+.hudReadout { text-align: center; }
+
+.runway { position: relative; height: 128px; background: #2a2d33; background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px); background-size: 5px 5px; overflow: hidden; display: flex; align-items: center; }
+.threshold { display: flex; flex-direction: column; justify-content: space-between; height: 96px; padding-left: var(--gutter); }
+.threshold { flex-direction: row; gap: 10px; align-items: stretch; }
+.threshold i { width: 12px; background: #f1f1ee; border-radius: 1px; }
+.rwyNum { margin-left: 34px; font-family: var(--cy-display); font-size: 64px; font-weight: 700; letter-spacing: 0.06em; color: #f1f1ee; writing-mode: vertical-rl; transform: rotate(180deg); line-height: 1; height: 108px; display: none; }
+.centerline { flex: 1; height: 6px; margin: 0 var(--gutter) 0 40px; background: repeating-linear-gradient(90deg, #f1f1ee 0 64px, transparent 64px 112px); animation: taxi 2.4s linear infinite; }
+.rwyPlane { position: absolute; top: 50%; left: 0; width: 64px; height: 64px; color: var(--gold); transform: translate(-80px, -50%) rotate(90deg); animation: roll 9s cubic-bezier(0.6, 0, 0.4, 1) infinite; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.5)); }
+.runway::before, .runway::after { content: ""; position: absolute; left: 0; right: 0; height: 3px; background: #f1f1ee; opacity: 0.85; }
+.runway::before { top: 10px; }
+.runway::after { bottom: 10px; }
+@keyframes taxi { to { background-position: -112px 0; } }
+@keyframes roll { 0% { transform: translate(-80px, -50%) rotate(90deg) scale(1); } 70% { transform: translate(calc(100vw - 40px), -50%) rotate(90deg) scale(1.15); } 100% { transform: translate(calc(100vw + 120px), -50%) rotate(90deg) scale(1.4); opacity: 0; } }
+@media (max-width: 600px) { .runway { height: 96px; } .threshold { height: 70px; gap: 7px; } .threshold i { width: 8px; } .rwyPlane { width: 46px; height: 46px; } }
+
+.routePlane { position: absolute; top: 9px; left: 0; width: 28px; height: 28px; color: var(--rock, #ff7a45); color: #ff7a45; transform: rotate(90deg); animation: fly 10s ease-in-out infinite; z-index: 1; }
+@keyframes fly { 0% { left: 0%; opacity: 0; } 8% { opacity: 1; } 85% { opacity: 1; } 100% { left: 96%; opacity: 0; } }
+@media (max-width: 760px) { .routePlane { display: none; } }
+.legDot { z-index: 2; }
+
+.sixPack { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 420px; margin-top: 30px; padding: 16px; border-radius: 18px; background: #1a1f2b; box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.06), 0 30px 60px -30px rgba(0, 0, 0, 0.8); }
+
+.goFly { position: relative; min-height: 92vh; display: flex; align-items: center; overflow: hidden; color: #fff; background: var(--ink); }
+.goFlyImg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 30% 50%; }
+.goFlyShade { position: absolute; inset: 0; background: linear-gradient(270deg, rgba(7, 13, 26, 0.94) 30%, rgba(7, 13, 26, 0.3) 70%, rgba(7, 13, 26, 0.1)); }
+.goFlyInner { width: 100%; display: flex; justify-content: flex-end; padding-block: 100px; }
+.goFlyCard { max-width: 540px; }
+.checklist { list-style: none; padding: 0; margin: 26px 0 30px !important; border-top: 1px solid rgba(255, 255, 255, 0.14); }
+.checklist li { display: flex; align-items: center; gap: 14px; padding: 13px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.14); font-size: 15.5px; }
+.checklist li::before { content: ""; flex: none; width: 20px; height: 20px; border-radius: 5px; border: 1.5px solid var(--gold); background: linear-gradient(var(--gold), var(--gold)) center / 10px 10px no-repeat; }
+@media (max-width: 760px) { .goFly { align-items: flex-end; } .goFlyShade { background: linear-gradient(180deg, rgba(7, 13, 26, 0.1) 10%, rgba(7, 13, 26, 0.95) 55%); } .goFlyInner { padding-top: 320px; padding-bottom: 70px; } }
+
+/* Hero v2: student pilot photo, copy on the right */
+.heroImg { object-position: 22% 40%; }
+.heroShade { background: linear-gradient(270deg, rgba(7, 13, 26, 0.92) 0%, rgba(7, 13, 26, 0.6) 40%, rgba(7, 13, 26, 0) 70%), linear-gradient(180deg, rgba(7, 13, 26, 0.6) 0%, rgba(7, 13, 26, 0) 25%, rgba(7, 13, 26, 0) 60%, rgba(7, 13, 26, 0.96) 100%); }
+@media (min-width: 901px) {
+  .heroInner { display: flex; flex-direction: column; align-items: flex-start; padding-left: max(var(--gutter), calc(100% - 640px - var(--gutter))); }
+  .heroTitle { font-size: clamp(56px, 7.4vw, 120px); }
+}
+@media (max-width: 900px) {
+  .heroImg { object-position: 36% 30%; height: 62%; }
+  .hero { background: #070d1a; }
+  .heroShade { background: linear-gradient(180deg, rgba(7, 13, 26, 0.55) 0%, rgba(7, 13, 26, 0.15) 25%, rgba(7, 13, 26, 0.75) 55%, rgba(7, 13, 26, 0.97) 100%); }
+  .heroInner { padding-top: 46vh; }
+}
+.goFlyImg { object-position: 50% 45%; }
+.goFlyShade { background: linear-gradient(270deg, rgba(7, 13, 26, 0.94) 30%, rgba(7, 13, 26, 0.35) 70%, rgba(7, 13, 26, 0.15)); }
+
+/* Brand v2: pilot wings */
+.wings { width: 58px; height: auto; color: #fff; flex: none; }
+.brand { gap: 14px; }
+.brandText strong { font-size: 17px; font-weight: 600; letter-spacing: 0; }
+.brandText small { font-size: 10.5px; letter-spacing: 0.28em; color: rgba(255, 255, 255, 0.6); margin-top: 4px; }
+@media (max-width: 420px) { .wings { width: 46px; } .brand { gap: 10px; } }
+@media (max-width: 760px) {
+  .goFlyShade { background: linear-gradient(180deg, rgba(7, 13, 26, 0.05) 0%, rgba(7, 13, 26, 0.55) 30%, rgba(7, 13, 26, 0.96) 52%); }
+  .goFlyImg { height: 55%; object-position: 50% 40%; }
+  .communityShade { background: linear-gradient(180deg, rgba(7, 13, 26, 0) 15%, rgba(7, 13, 26, 0.7) 45%, rgba(7, 13, 26, 0.97) 75%); }
+}
