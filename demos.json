@@ -22,6 +22,9 @@
       "created": "2026-10-18",
       "keep": true
     },
+    "dream-flight": {
+      "created": "2026-10-21"
+    },
     "driftless-aero": {
       "created": "2026-10-18"
     },
@@ -34,6 +37,9 @@
     "lc-flying": {
       "created": "2026-10-18"
     },
+    "mach1-flight": {
+      "created": "2026-10-21"
+    },
     "mrfti": {
       "created": "2026-10-20"
     },
@@ -43,8 +49,14 @@
     "suburban-aviation": {
       "created": "2026-10-18"
     },
+    "ufly-sheboygan": {
+      "created": "2026-10-21"
+    },
     "venture-north": {
       "created": "2026-10-18"
+    },
+    "west-nyack-aviation": {
+      "created": "2026-10-21"
     }
   }
 }
