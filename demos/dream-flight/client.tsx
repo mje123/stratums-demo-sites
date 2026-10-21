@@ -33,8 +33,19 @@ export function Nav({ phone, tel }: { phone: string; tel: string }) {
     <header className={`${s.nav} ${scrolled || open ? s.navSolid : ""}`}>
       <div className={s.navInner}>
         <a href="#top" onClick={close} className={s.brand}>
-          <svg viewBox="0 0 24 24" className={s.brandStar} aria-hidden><path d="M12 1l2.2 8.8L23 12l-8.8 2.2L12 23l-2.2-8.8L1 12l8.8-2.2z" /></svg>
-          <span><em>Dream</em><small>Flight School</small></span>
+          {/* Their propeller-and-lettering logo, redrawn as vector for the dark header */}
+          <span className={s.logo}>
+            <svg viewBox="0 0 200 60" className={s.prop} aria-hidden>
+              <g transform="translate(100 30) rotate(-16)">
+                <g className={s.propSpin}>
+                  <path d="M0 -4C30 -9 70 -8 95 -3C98 -1 98 1 95 3C70 6 30 6 0 4Z" />
+                  <path d="M0 -4C30 -9 70 -8 95 -3C98 -1 98 1 95 3C70 6 30 6 0 4Z" transform="rotate(180)" />
+                  <circle r="6.5" className={s.propHub} />
+                </g>
+              </g>
+            </svg>
+            <span className={s.logoText}><b>Dream Flight</b><b>School</b></span>
+          </span>
         </a>
         <nav className={`${s.navLinks} ${open ? s.navOpen : ""}`} aria-label="Primary">
           {links.map(([label, href]) => <a key={href} href={href} onClick={close}>{label}</a>)}
