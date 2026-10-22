@@ -4,6 +4,12 @@
     "airplane-rental-ventures": {
       "created": "2026-10-20"
     },
+    "aviators-academy": {
+      "created": "2026-10-22"
+    },
+    "az-flight-training": {
+      "created": "2026-10-22"
+    },
     "client-name": {
       "created": "2026-10-18",
       "keep": true
@@ -28,11 +34,17 @@
     "driftless-aero": {
       "created": "2026-10-18"
     },
+    "eagles-wings": {
+      "created": "2026-10-22"
+    },
     "flying-tigers": {
       "created": "2026-10-18"
     },
     "jf-aviation": {
       "created": "2026-10-20"
+    },
+    "kal-aero": {
+      "created": "2026-10-22"
     },
     "lc-flying": {
       "created": "2026-10-18"
@@ -40,8 +52,20 @@
     "mach1-flight": {
       "created": "2026-10-21"
     },
+    "mississippi-aviation": {
+      "created": "2026-10-22"
+    },
     "mrfti": {
       "created": "2026-10-20"
+    },
+    "noble-aire": {
+      "created": "2026-10-22"
+    },
+    "pilot-pathways": {
+      "created": "2026-10-22"
+    },
+    "progress-flight": {
+      "created": "2026-10-22"
     },
     "spencer-aviation": {
       "created": "2026-10-18"
