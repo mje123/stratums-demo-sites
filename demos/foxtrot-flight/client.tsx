@@ -33,7 +33,7 @@ export function Nav({ phone, tel }: { phone: string; tel: string }) {
     <header className={`${s.nav} ${scrolled || open ? s.navSolid : ""}`}>
       <div className={s.navInner}>
         <a href="#top" onClick={close} className={s.brand}>
-          <span className={s.logo}>F</span>
+          <img src="/foxtrot-flight/logo.png" alt="" className={s.logo} />
           <span className={s.brandText}><b>Foxtrot</b><small>Flight Training</small></span>
         </a>
         <nav className={`${s.navLinks} ${open ? s.navOpen : ""}`} aria-label="Primary">

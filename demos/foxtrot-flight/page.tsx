@@ -70,6 +70,7 @@ export default function FoxtrotFlight() {
         <img className={s.heroImg} src={img("hero-sunset")} alt="Foxtrot's Luscombe 8A on the ramp at sunset" fetchPriority="high" />
         <div className={s.heroShade} />
         <div className={s.heroInner}>
+          <img src={img("logo").replace(".jpg", ".png")} alt="Foxtrot Flight Training logo: a fox pilot flying a biplane" className={`${s.heroBadge} ${s.rise}`} />
           <p className={`${s.eyebrow} ${s.rise}`}>Dowagiac Municipal Airport · C91 · Southwest Michigan</p>
           <h1 className={`${s.heroTitle} ${s.rise}`} style={{ animationDelay: "120ms" }}>
             Stop gazing at the sky.<br /><span>Start flying it.</span>
