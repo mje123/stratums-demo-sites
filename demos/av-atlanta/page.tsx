@@ -48,7 +48,7 @@ export default function AvAtlanta() {
             </div>
           </div>
           <div className={`${s.heroPhoto} ${s.rise}`} style={{ animationDelay: "300ms" }}>
-            <img src={img("kid-sim")} alt="A young student at the controls of a flight simulator" fetchPriority="high" />
+            <img src={img("plane-desert")} alt="A twin-engine airplane in flight over the desert" className={s.heroPlane} fetchPriority="high" />
             <div className={s.badge}><AvMark className={s.badgeMark} /><span>First time<br />at the controls</span></div>
           </div>
         </div>
@@ -91,8 +91,8 @@ export default function AvAtlanta() {
             <Levels />
           </Reveal>
           <Reveal delay={120} className={s.collage}>
-            <img src={img("paper-plane")} alt="A student folding a paper airplane" loading="lazy" />
-            <img src={img("students-lab")} alt="Students working at computers with an instructor" loading="lazy" />
+            <img src={img("cockpit")} alt="An airplane cockpit full of flight instruments" loading="lazy" />
+            <img src={img("sim-view")} alt="A flight simulator screen showing a desert runway" loading="lazy" />
           </Reveal>
         </div>
       </section>
@@ -141,7 +141,6 @@ export default function AvAtlanta() {
             <div className={s.who}>
               {["Teachers", "Principals", "Parents", "Sponsors"].map((w) => <span key={w}>{w}</span>)}
             </div>
-            <img src={img("field-trip")} alt="A group of students posing in front of an aircraft" className={s.contactImg} loading="lazy" />
           </Reveal>
           <Reveal delay={120}>
             <VisitForm />

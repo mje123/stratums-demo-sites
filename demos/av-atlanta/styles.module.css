@@ -195,3 +195,4 @@
   .reveal { opacity: 1; transform: none; }
 }
 .heroTitle { position: relative; isolation: isolate; }
+.heroPhoto img.heroPlane { object-position: 0% 50%; }
